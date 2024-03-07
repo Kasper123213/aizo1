@@ -1,0 +1,11 @@
+
+#ifndef AIZO1_TESTYAUTOMATYCZNE_H
+#define AIZO1_TESTYAUTOMATYCZNE_H
+
+
+class TestyAutomatyczne {
+
+};
+
+
+#endif //AIZO1_TESTYAUTOMATYCZNE_H

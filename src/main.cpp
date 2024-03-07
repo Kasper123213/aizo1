@@ -2,8 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <windows.h>
-#include "testy/TestyManualne.h"
-#include "testy/TestyAutomatyczne.h"
+#include "tests/ManualTest.h"
+#include "tests/AutoTest.h"
 
 using namespace std;
 int main() {
@@ -26,12 +26,12 @@ int main() {
 
         if(choice == 1){
             //inicjowanie pamięci na włączenie testów
-            TestyManualne *test = new TestyManualne;
+            ManualTest *test = new ManualTest;
 
             delete test;
         }else if(choice == 2){
             //inicjowanie pamięci na włączenie testów
-            TestyAutomatyczne *test = new TestyAutomatyczne;
+            AutoTest *test = new AutoTest;
 
             delete test;
         }

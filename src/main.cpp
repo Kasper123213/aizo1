@@ -17,10 +17,10 @@ int main() {
 
     do{
         cout<<"Jaki rodzaj testów wybierasz?"<<endl
-        <<"\t1. Testy manualne"<<endl
-        <<"\t2. Testy automatyczne"<<endl
-        <<"\t0. Zakończenie działania programu"<<endl
-        <<">>";
+            <<"\t1. Testy manualne"<<endl
+            <<"\t2. Testy automatyczne"<<endl
+            <<"\t0. Zakończenie działania programu"<<endl
+            <<">>";
 
         cin>>choice;
 

@@ -5,7 +5,6 @@
 
 
 #include "../table/Table.h"
-#include <random>
 
 template<typename T>
 class ManualTest {
@@ -24,7 +23,6 @@ public:
     bool isSorted();
 
     void generateTable(int size, int generatingType);
-    void randomFULL(int size);
 
     void sort();
 };

@@ -13,7 +13,7 @@ ManualTest<T>::ManualTest(){
     do{
         cout<<"Wybierz co chcesz zrobić:"<<endl
             <<"\t1. Wczytaj z pliku tablicę do posortowanie"<<endl
-            <<"\t2. Wygeneruj losową tablicę do posortowanie"<<endl//todo
+            <<"\t2. Wygeneruj losową tablicę do posortowanie"<<endl
             <<"\t3. Pokaż tablicę nieposortowaną (ostatnia wczytana lub wygenerowana)"<<endl
             <<"\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo"<<endl
             <<"\t5. Uruchom algorytm sortujący"<<endl//todo
@@ -65,7 +65,7 @@ ManualTest<T>::ManualTest(){
                 break;
 
             case 5:
-                sort();//todo
+                sort();//todo rodzaje sortowania
                 break;
 
             case 6:
@@ -142,35 +142,34 @@ bool ManualTest<T>::isSorted() {
 
 template<typename T>
 void ManualTest<T>::generateTable(int size, int generatingType) {
+    table->clear();
     //losowo, 33, 66, malejąco, rosnąco
     switch (generatingType) {
-        case 1://todo
+        case 1:
+            table->randomFULL(size);
             break;
 
-        case 2://todo
+        case 2:
+            table->randomPercent(size, 33);
             break;
 
-        case 3://todo
+        case 3:
+            table->randomPercent(size, 66);
             break;
 
-        case 4://todo
+        case 4:
+            table->randomDescending(size);
+            break;
+
+        case 5:
+            table->randomGrowing(size);
             break;
     }
 }
 
 
 template<typename T>
-void ManualTest<T>::randomFULL(int size) {
-
-
-    for(int i=0; i<size; i++){
-        table->addHead(3);
-    }
-}
-
-
-template<typename T>
-void ManualTest<T>::sort(){
+void ManualTest<T>::sort(){ //todo
     sortedTable->clear();
 
     for(int i=0; i<table->getSize();i++){
@@ -182,4 +181,4 @@ void ManualTest<T>::sort(){
 // Deklaracja szablonów klasowych
 template class ManualTest<int>;
 template class ManualTest<float>;
-template class ManualTest<char>;
+template class ManualTest<unsigned long long>;

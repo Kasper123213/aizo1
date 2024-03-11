@@ -54,6 +54,11 @@ public:
 
     //Zwraca element tablicy
     T get(int index);
+
+    void randomFULL(int size);
+    void randomPercent(int size, int percent);
+    void randomGrowing(int size);
+    void randomDescending(int size);
 };
 
 

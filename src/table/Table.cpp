@@ -1,4 +1,6 @@
 #include <iostream>
+#include <random>
+#include <limits>
 #include "Table.h"
 
 using namespace std;
@@ -188,8 +190,70 @@ T Table<T>::get(int index){
     return head[index];
 }
 
+template<typename T>
+void Table<T>::randomFULL(int size) {
+    random_device rd;
+    mt19937 gen(rd());
+
+    if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
+        T max = numeric_limits<T>::max();
+        uniform_real_distribution<T> dis(0, max);
+        for (int i = 0; i < size; i++) {
+            addEnd(dis(gen));
+        }
+    } else {
+        T max = numeric_limits<T>::max();
+        uniform_int_distribution<T> dis(0, max);
+        for (int i = 0; i < size; i++) {
+            addEnd(dis(gen));
+        }
+    }
+}
+
+
+template<typename T>
+void Table<T>::randomPercent(int size, int percent) {
+    random_device rd;
+    mt19937 gen(rd());
+    int sorted = size * percent / 100;
+
+    for(int i = 0;i<sorted;i++){
+        addEnd(T(33));
+    }
+
+    if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
+        T max = numeric_limits<T>::max();
+        uniform_real_distribution<T> dis(34, max);
+        for (int i = sorted; i < size; i++) {
+            addEnd(dis(gen));
+        }
+    } else {
+        T max = numeric_limits<T>::max();
+        uniform_int_distribution<T> dis(34, max);
+        for (int i = sorted; i < size; i++) {
+            addEnd(dis(gen));
+        }
+    }
+}
+
+
+template<typename T>
+void Table<T>::randomDescending(int size) {
+    T max = numeric_limits<T>::max();
+    for(T i = max; i > max - size; i--){
+        addEnd(i);
+    }
+}
+
+template<typename T>
+void Table<T>::randomGrowing(int size) {
+    T max = numeric_limits<T>::max();
+    for(T i = max - size; i < max; i++){
+        addEnd(i);
+    }
+}
 
 // Deklaracja szablonów klasowych
 template class Table<int>;
 template class Table<float>;
-template class Table<char>;
+template class Table<unsigned long long>;

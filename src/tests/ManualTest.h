@@ -5,6 +5,7 @@
 
 
 #include "../table/Table.h"
+#include <windows.h>
 
 template<typename T>
 class ManualTest {
@@ -24,7 +25,7 @@ public:
 
     void generateTable(int size, int generatingType);
 
-    void sort();
+    void sort(int sortingType);
 };
 
 

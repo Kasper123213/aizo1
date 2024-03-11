@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <typeinfo>
 #include "ManualTest.h"
-
+#include "../sortingAlgorithms/QuickSort.h"
 
 
 using namespace std;
@@ -11,12 +12,13 @@ ManualTest<T>::ManualTest(){
     int choice = 0;
     string path;
     do{
+
         cout<<"Wybierz co chcesz zrobić:"<<endl
             <<"\t1. Wczytaj z pliku tablicę do posortowanie"<<endl
             <<"\t2. Wygeneruj losową tablicę do posortowanie"<<endl
             <<"\t3. Pokaż tablicę nieposortowaną (ostatnia wczytana lub wygenerowana)"<<endl
             <<"\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo"<<endl
-            <<"\t5. Uruchom algorytm sortujący"<<endl//todo
+            <<"\t5. Uruchom algorytm sortujący"<<endl
             <<"\t6. Pokaż tablicę po posortowaniu"<<endl
             <<"\t0. Wyjdź z menu"<<endl
             <<">>";
@@ -24,55 +26,64 @@ ManualTest<T>::ManualTest(){
         cin>>choice;
 
         switch (choice) {
-            case 1:
-                cout<<"Podaj ścieżkę do pliku z danymi do posortowania:\n>>";
-                cin>>path;
+            case 1: {
+                cout << "Podaj ścieżkę do pliku z danymi do posortowania:\n>>";
+                cin >> path;
 
-                if(not readFromFile(path)){
-                    cout<<"Nie udało się wczytać danych z podanego pliku";
+                if (not readFromFile(path)) {
+                    cout << "Nie udało się wczytać danych z podanego pliku";
                 }
                 break;
-
-            case 2:
-                cout<<"Podaj rozmiar tablicy, którą chcesz wygenerować:\n>>";
+            }
+            case 2: {
+                cout << "Podaj rozmiar tablicy, którą chcesz wygenerować:\n>>";
                 int size;
-                cin>>size;
+                cin >> size;
 
-                cout<<"Wybierz tryb losowanie tablicy:"<<endl
-                <<"\t1. Tablica całkowicie losowa"<<endl
-                <<"\t2. Tablica mająca posortowane pierwsze 33%"<<endl
-                <<"\t3. Tablica mająca posortowane pierwsze 66%"<<endl
-                <<"\t4. Tablica posortowana malejąco"<<endl
-                <<"\t5. Tablica posortowana rosnąco\n>>";
+                cout << "Wybierz tryb losowanie tablicy:" << endl
+                     << "\t1. Tablica całkowicie losowa" << endl
+                     << "\t2. Tablica mająca posortowane pierwsze 33%" << endl
+                     << "\t3. Tablica mająca posortowane pierwsze 66%" << endl
+                     << "\t4. Tablica posortowana malejąco" << endl
+                     << "\t5. Tablica posortowana rosnąco\n>>";
 
                 int generatingType;
-                cin>>generatingType;
+                cin >> generatingType;
 
                 generateTable(size, generatingType);
                 break;
-
-            case 3:
-                if(table->getSize()>20) cout<<"Tablica za duża na wyświetlenie";
+            }
+            case 3: {
+                if (table->getSize() > 20) cout << "Tablica za duża na wyświetlenie";
                 table->printTable();
                 break;
-
-            case 4:
-                if(isSorted()){
-                    cout<<"Tablica posortowana poprawnie"<<endl;
-                }else{
-                    cout<<"Tablica posortowana niepoprawnie"<<endl;
+            }
+            case 4: {
+                if (isSorted()) {
+                    cout << "Tablica posortowana poprawnie" << endl;
+                } else {
+                    cout << "Tablica posortowana niepoprawnie" << endl;
                 }
                 break;
+            }
+            case 5: {
+                cout << "Wybierz rodzaj algorytmu sortującego:" << endl
+                     << "\t1. Sortowanie przez wstawianie" << endl
+                     << "\t2. Sortowanie przez kopcowanie" << endl
+                     << "\t3. Sortowanie Shella" << endl
+                     << "\t4. Sortowanie szybkie\n>>";
 
-            case 5:
-                sort();//todo rodzaje sortowania
+                int sortingType = 1;
+                cin >> sortingType;
+
+                sort(sortingType);
                 break;
-
-            case 6:
-                if(sortedTable->getSize()>20) cout<<"Tablica za duża na wyświetlenie";
-                sortedTable->printTable();
+            }
+            case 6: {
+                if (sortedTable->getSize() > 20) cout << "Tablica za duża na wyświetlenie";
+                else sortedTable->printTable();
                 break;
-
+            }
         }
 
     }while(choice != 0);
@@ -169,11 +180,25 @@ void ManualTest<T>::generateTable(int size, int generatingType) {
 
 
 template<typename T>
-void ManualTest<T>::sort(){ //todo
-    sortedTable->clear();
+void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
+    // sortowanie przez wstawianie, przez kopcowanie, Shella i szybkie
+    switch (sortingType) {
+        case 1:{//todo
+            break;
+        }
+        case 2:{//todo
+            break;
+        }
+        case 3:{//todo
+            break;
+        }
+        case 4:{
+            QuickSort<T>* quickSort = new QuickSort(table);
+            sortedTable = quickSort->start();
+            delete quickSort;
+            break;
+        }
 
-    for(int i=0; i<table->getSize();i++){
-        sortedTable->addEnd(table->get(i));
     }
 }
 

@@ -154,20 +154,16 @@ T Table<T>::searchValue(T value) {
 //metoda drujukujaca kolejne elementy tablicy w formacie [i] T[i]
 template<typename T>
 void Table<T>::printTable() {
+    cout<<"####################################################################################"<<endl;
     if (tableSize <= 0) {
-        cout << "Table pusta" << endl;
+        cout << "Tablica pusta" << endl;
         return;
     }
-    cout << "Kolejność normalna:" << endl;
     for (int i = 0; i < tableSize; i++) {
         cout << head[i] << ", ";
     }
     cout << endl;
-    cout << "Kolejność odwrotna:" << endl;
-    for (int i = 0; i < tableSize; i++) {
-        cout << head[tableSize - 1 - i] << ", ";
-    }
-    cout << endl;
+    cout<<"####################################################################################"<<endl;
 }
 
 template<typename T>
@@ -196,13 +192,21 @@ void Table<T>::randomFULL(int size) {
     mt19937 gen(rd());
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
-        T max = numeric_limits<T>::max();
+        T max;
+
+        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+        else max = numeric_limits<T>::max();
+
         uniform_real_distribution<T> dis(0, max);
         for (int i = 0; i < size; i++) {
             addEnd(dis(gen));
         }
     } else {
-        T max = numeric_limits<T>::max();
+        T max;
+
+        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+        else max = numeric_limits<T>::max();
+
         uniform_int_distribution<T> dis(0, max);
         for (int i = 0; i < size; i++) {
             addEnd(dis(gen));
@@ -217,19 +221,25 @@ void Table<T>::randomPercent(int size, int percent) {
     mt19937 gen(rd());
     int sorted = size * percent / 100;
 
-    for(int i = 0;i<sorted;i++){
-        addEnd(T(33));
+    for(T i = 0;i<sorted;i++){
+        addEnd(T(i));
     }
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
-        T max = numeric_limits<T>::max();
-        uniform_real_distribution<T> dis(34, max);
+        T max;
+
+        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+        else max = numeric_limits<T>::max();
+        uniform_real_distribution<T> dis(sorted, max);
         for (int i = sorted; i < size; i++) {
             addEnd(dis(gen));
         }
     } else {
-        T max = numeric_limits<T>::max();
-        uniform_int_distribution<T> dis(34, max);
+        T max;
+        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+        else max = numeric_limits<T>::max();
+
+        uniform_int_distribution<T> dis(sorted, max);
         for (int i = sorted; i < size; i++) {
             addEnd(dis(gen));
         }
@@ -239,7 +249,11 @@ void Table<T>::randomPercent(int size, int percent) {
 
 template<typename T>
 void Table<T>::randomDescending(int size) {
-    T max = numeric_limits<T>::max();
+    T max;
+
+    if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+    else max = numeric_limits<T>::max();
+
     for(T i = max; i > max - size; i--){
         addEnd(i);
     }
@@ -247,10 +261,23 @@ void Table<T>::randomDescending(int size) {
 
 template<typename T>
 void Table<T>::randomGrowing(int size) {
-    T max = numeric_limits<T>::max();
+    T max;
+
+    if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
+    else max = numeric_limits<T>::max();
+
     for(T i = max - size; i < max; i++){
         addEnd(i);
     }
+}
+
+template<typename T>
+void Table<T>::swap(int i, int j) {
+    std::swap(head[i], head[j]);
+}
+template<typename T>
+void Table<T>::set(int i, T value) {
+    head[i] = value;
 }
 
 // Deklaracja szablonów klasowych

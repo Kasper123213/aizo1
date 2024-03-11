@@ -25,10 +25,35 @@ int main() {
         cin>>choice;
 
         if(choice == 1){
-            //inicjowanie pamięci na włączenie testów
-            ManualTest *test = new ManualTest;
+            int dataType = 1;
 
-            delete test;
+            cout<<"Na jakim typie danych chcesz operować?"<<endl
+            <<"\t1. int"<<endl
+            <<"\t2. float"<<endl
+            <<"\t3. char"<<endl
+            <<">>";
+
+            cin>>dataType;
+            //inicjowanie pamięci na włączenie testów
+            switch (dataType) {
+                case 1: {
+                    ManualTest<int> *test = new ManualTest<int>();
+                    delete test;
+                    break;
+                }
+                case 2: {
+                    ManualTest<float> *test = new ManualTest<float>();
+                    delete test;
+                    break;
+                }
+                case 3: {
+                    ManualTest<char> *test = new ManualTest<char>();
+                    delete test;
+                    break;
+                }
+            }
+
+
         }else if(choice == 2){
             //inicjowanie pamięci na włączenie testów
             AutoTest *test = new AutoTest; //todo dodać testy automatyczne

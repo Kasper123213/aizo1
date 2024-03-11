@@ -7,11 +7,12 @@
 #include "../table/Table.h"
 #include <random>
 
+template<typename T>
 class ManualTest {
 private:
 
-    Table* table = new Table();
-    Table* sortedTable = new Table();
+    Table<T>* table = new Table<T>();
+    Table<T>* sortedTable = new Table<T>();
 
 
 
@@ -25,6 +26,7 @@ public:
     void generateTable(int size, int generatingType);
     void randomFULL(int size);
 
+    void sort();
 };
 
 

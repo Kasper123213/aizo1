@@ -2,11 +2,11 @@
 #ifndef AIZO1_TABLE_H
 #define AIZO1_TABLE_H
 
-
+template<typename T>
 class Table{
 private:
     //wakaznik na początek tablicy
-    int *head;
+    T *head;
     //dlugosc tablicy / liczba elementow
     int tableSize;
 
@@ -19,13 +19,13 @@ public:
     ~Table();
 
     //metoda dodająca element na początek tablicy
-    void addHead(int value);
+    void addHead(T value);
 
     //metoda dodająca element na koniec tablicy
-    void addEnd(int value);
+    void addEnd(T value);
 
     //metoda dodająca element na wybrany indeks tablicy
-    void addOnIndex(int index, int value);
+    void addOnIndex(int index, T value);
 
     //metoda usuwajaca element z poczatku tablicy
     void deleteFirst();
@@ -38,7 +38,7 @@ public:
 
     //metoda wyszukujaca pierwszy element o podanej wartości z tablicy i zwracajaca jego indeks,
     // jesli elementu niema w tablicy, zwraca -1
-    int searchValue(int value);
+    T searchValue(T value);
 
     //metoda drujukujaca kolejne elementy tablicy w formacie [i]{T[i]}
     void printTable();
@@ -47,13 +47,13 @@ public:
     int getSize();
 
     //ustawianie tablicy
-    void setTable(int *nowaTablica, int rozmiar);
+    void setTable(T *nowaTablica, int rozmiar);
 
     //czyszczenie tablicy
-    void clearTable();
+    void clear();
 
     //Zwraca element tablicy
-    int get(int index);
+    T get(int index);
 };
 
 

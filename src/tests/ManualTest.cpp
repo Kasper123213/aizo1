@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include "ManualTest.h"
-#include "../table/Table.h"
+
 
 
 using namespace std;
-ManualTest::ManualTest(){
+
+template<typename T>
+ManualTest<T>::ManualTest(){
     int choice = 0;
     string path;
     do{
@@ -62,6 +64,10 @@ ManualTest::ManualTest(){
                 }
                 break;
 
+            case 5:
+                sort();//todo
+                break;
+
             case 6:
                 if(sortedTable->getSize()>20) cout<<"Tablica za duża na wyświetlenie";
                 sortedTable->printTable();
@@ -72,17 +78,17 @@ ManualTest::ManualTest(){
     }while(choice != 0);
 }
 
-ManualTest::~ManualTest() {
+template<typename T>
+ManualTest<T>::~ManualTest() {
     delete table;
     delete sortedTable;
 }
 
 
-
-bool ManualTest::readFromFile(string path){
+template<typename T>
+bool ManualTest<T>::readFromFile(string path){
     path = "C:\\Users\\radom\\OneDrive\\Pulpit\\aizo\\aizo1\\testTables\\table1.txt";
-    delete table;
-    table = new Table();
+    table->clear();
 
     // Otwórz plik
     ifstream file(path);
@@ -93,7 +99,7 @@ bool ManualTest::readFromFile(string path){
     }
 
     // Zmienna przechowująca wartość wczytaną z pliku
-    int word;
+    T word;
 
     // Wyczyść flagi błędów i pozycję odczytu pliku
     file.clear();
@@ -109,7 +115,8 @@ bool ManualTest::readFromFile(string path){
 }
 
 
-bool ManualTest::isSorted() {
+template<typename T>
+bool ManualTest<T>::isSorted() {
     if(sortedTable->getSize() == 0){
         cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
         return false;
@@ -118,8 +125,8 @@ bool ManualTest::isSorted() {
     }
 
 
-    int first = sortedTable->get(0);
-    int second;
+    T first = sortedTable->get(0);
+    T second;
 
     for(int index=1; index<sortedTable->getSize(); index++){
         second = sortedTable->get(index);
@@ -132,7 +139,9 @@ bool ManualTest::isSorted() {
     return true;
 }
 
-void ManualTest::generateTable(int size, int generatingType) {
+
+template<typename T>
+void ManualTest<T>::generateTable(int size, int generatingType) {
     //losowo, 33, 66, malejąco, rosnąco
     switch (generatingType) {
         case 1://todo
@@ -149,7 +158,9 @@ void ManualTest::generateTable(int size, int generatingType) {
     }
 }
 
-void ManualTest::randomFULL(int size) {
+
+template<typename T>
+void ManualTest<T>::randomFULL(int size) {
 
 
     for(int i=0; i<size; i++){
@@ -157,3 +168,18 @@ void ManualTest::randomFULL(int size) {
     }
 }
 
+
+template<typename T>
+void ManualTest<T>::sort(){
+    sortedTable->clear();
+
+    for(int i=0; i<table->getSize();i++){
+        sortedTable->addEnd(table->get(i));
+    }
+}
+
+
+// Deklaracja szablonów klasowych
+template class ManualTest<int>;
+template class ManualTest<float>;
+template class ManualTest<char>;

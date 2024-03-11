@@ -3,13 +3,14 @@
 
 using namespace std;
 
-
-Table::Table() {     //ustawianie atrybutów tablicy
-    Table::tableSize = 0;
-    Table::head = nullptr;
+template<typename T>
+Table<T>::Table() {     //ustawianie atrybutów tablicy
+    Table<T>::tableSize = 0;
+    Table<T>::head = nullptr;
 }
 
-Table::~Table() {   //zwalnianie pamięci po tablicy
+template<typename T>
+Table<T>::~Table() {   //zwalnianie pamięci po tablicy
     if (head != nullptr) {
         delete[]head;
     }
@@ -18,11 +19,14 @@ Table::~Table() {   //zwalnianie pamięci po tablicy
 }
 
 
-int Table::getSize() { return tableSize; }
+template<typename T>
+int Table<T>::getSize() { return tableSize; }
+
 
 //metoda dodająca element na początek tablicy
-void Table::addHead(int value) {
-    int *newHead = new int[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+template<typename T>
+void Table<T>::addHead(T value) {
+    T *newHead = new T[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
 
     for (int i = 0; i < tableSize; i++) {         //wstawianie elementow starej tablicy
         newHead[i + 1] = head[i];              //"i+1" bo index 0 nowej tablicy zostawiamy na podana value
@@ -36,8 +40,9 @@ void Table::addHead(int value) {
 
 
 //metoda dodająca element na koniec tablicy
-void Table::addEnd(int value) {
-    int *newHead = new int[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+template<typename T>
+void Table<T>::addEnd(T value) {
+    T *newHead = new T[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
 
     for (int i = 0; i < tableSize; i++) {         //wstawianie elementow starej tablicy
         newHead[i] = head[i];
@@ -52,12 +57,13 @@ void Table::addEnd(int value) {
 
 
 //metoda dodająca element na wybrany index tablicy
-void Table::addOnIndex(int index, int value) {
+template<typename T>
+void Table<T>::addOnIndex(int index, T value) {
     if(index<0 || index>tableSize) {   //sprawdzanie czy podano poprawny index
         return;
     }
 
-    int *newHead = new int[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+    T *newHead = new T[tableSize + 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
     for (int i = 0; i <
                     index; i++) {                  //wstawianie elementow ktore powinny znalezc sie na indexach mniejszych niz podany
         newHead[i] = head[i];
@@ -74,12 +80,13 @@ void Table::addOnIndex(int index, int value) {
 
 
 //metoda usuwajaca element z poczatku tablicy
-void Table::deleteFirst() {
+template<typename T>
+void Table<T>::deleteFirst() {
     if(tableSize<=0){ //sprawdzanie czy tablica jest pusta
         return;
     }
 
-    int *newHead = new int[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+    T *newHead = new T[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
     for (int i = 1;
          i < tableSize; i++) {         //wstawianie elementow starej tablicy z pominieciem pierwszego elementu
         newHead[i - 1] = head[i];
@@ -91,12 +98,13 @@ void Table::deleteFirst() {
 
 
 //metoda usuwajaca element z konca tablicy
-void Table::deleteLast() {
+template<typename T>
+void Table<T>::deleteLast() {
     if(tableSize<=0){ //sprawdzanie czy tablica jest pusta
         return;
     }
 
-    int *newHead = new int[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+    T *newHead = new T[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
     for (int i = 0;
          i < tableSize - 1; i++) {     //wstawianie elementow starej tablicy z pominieciem ostatniego elementu
         newHead[i] = head[i];
@@ -109,11 +117,12 @@ void Table::deleteLast() {
 
 
 //metoda usuwajaca element o podanym indexie z tablicy
-void Table::deleteIndex(int index) {
+template<typename T>
+void Table<T>::deleteIndex(int index) {
     if(index<0 || index>=tableSize || tableSize <=0){ //sprawdzanie czy podano poprawny index
         return;
     }
-    int *newHead = new int[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
+    T *newHead = new T[tableSize - 1];   //ustawianie nowego wskaznika na nowa, wiekszą tablice
     for (int i = 0;
          i < index; i++) {                  //wstawianie elementow starej tablicy od poczatku do podanego indexu
         newHead[i] = head[i];
@@ -131,7 +140,8 @@ void Table::deleteIndex(int index) {
 
 //metoda wyszukujaca pierwszy element o podanej valuei z tablicy i zwracajaca jego index,
 // jesli elementu niema w tablicy, zwraca -1
-int Table::searchValue(int value) {
+template<typename T>
+T Table<T>::searchValue(T value) {
     for (int i = 0; i < tableSize; i++) {                 //po kolei sprawdzamy czy i-ty element jest rowny podanej valuei
         if (head[i] == value)return i;
     }
@@ -140,7 +150,8 @@ int Table::searchValue(int value) {
 
 
 //metoda drujukujaca kolejne elementy tablicy w formacie [i] T[i]
-void Table::printTable() {
+template<typename T>
+void Table<T>::printTable() {
     if (tableSize <= 0) {
         cout << "Table pusta" << endl;
         return;
@@ -157,16 +168,28 @@ void Table::printTable() {
     cout << endl;
 }
 
-void Table::setTable(int *newTable, int size) {
+template<typename T>
+void Table<T>::setTable(T *newTable, int size) {
     delete[]head;
     head = newTable;
     tableSize=size;
 }
 
-void Table::clearTable() {
+template<typename T>
+void Table<T>::clear() {
+    delete []head;
+    head = nullptr;
+    tableSize = 0;
 
 }
 
-int Table::get(int index){
+template<typename T>
+T Table<T>::get(int index){
     return head[index];
 }
+
+
+// Deklaracja szablonów klasowych
+template class Table<int>;
+template class Table<float>;
+template class Table<char>;

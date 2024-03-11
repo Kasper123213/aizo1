@@ -1,5 +1,159 @@
+#include <iostream>
+#include <fstream>
 #include "ManualTest.h"
+#include "../table/Table.h"
 
-void ManualTest::wyborAlgorytmu(){
 
+using namespace std;
+ManualTest::ManualTest(){
+    int choice = 0;
+    string path;
+    do{
+        cout<<"Wybierz co chcesz zrobić:"<<endl
+            <<"\t1. Wczytaj z pliku tablicę do posortowanie"<<endl
+            <<"\t2. Wygeneruj losową tablicę do posortowanie"<<endl//todo
+            <<"\t3. Pokaż tablicę nieposortowaną (ostatnia wczytana lub wygenerowana)"<<endl
+            <<"\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo"<<endl
+            <<"\t5. Uruchom algorytm sortujący"<<endl//todo
+            <<"\t6. Pokaż tablicę po posortowaniu"<<endl
+            <<"\t0. Wyjdź z menu"<<endl
+            <<">>";
+
+        cin>>choice;
+
+        switch (choice) {
+            case 1:
+                cout<<"Podaj ścieżkę do pliku z danymi do posortowania:\n>>";
+                cin>>path;
+
+                if(not readFromFile(path)){
+                    cout<<"Nie udało się wczytać danych z podanego pliku";
+                }
+                break;
+
+            case 2:
+                cout<<"Podaj rozmiar tablicy, którą chcesz wygenerować:\n>>";
+                int size;
+                cin>>size;
+
+                cout<<"Wybierz tryb losowanie tablicy:"<<endl
+                <<"\t1. Tablica całkowicie losowa"<<endl
+                <<"\t2. Tablica mająca posortowane pierwsze 33%"<<endl
+                <<"\t3. Tablica mająca posortowane pierwsze 66%"<<endl
+                <<"\t4. Tablica posortowana malejąco"<<endl
+                <<"\t5. Tablica posortowana rosnąco\n>>";
+
+                int generatingType;
+                cin>>generatingType;
+
+                generateTable(size, generatingType);
+                break;
+
+            case 3:
+                if(table->getSize()>20) cout<<"Tablica za duża na wyświetlenie";
+                table->printTable();
+                break;
+
+            case 4:
+                if(isSorted()){
+                    cout<<"Tablica posortowana poprawnie"<<endl;
+                }else{
+                    cout<<"Tablica posortowana niepoprawnie"<<endl;
+                }
+                break;
+
+            case 6:
+                if(sortedTable->getSize()>20) cout<<"Tablica za duża na wyświetlenie";
+                sortedTable->printTable();
+                break;
+
+        }
+
+    }while(choice != 0);
 }
+
+ManualTest::~ManualTest() {
+    delete table;
+    delete sortedTable;
+}
+
+
+
+bool ManualTest::readFromFile(string path){
+    path = "C:\\Users\\radom\\OneDrive\\Pulpit\\aizo\\aizo1\\testTables\\table1.txt";
+    delete table;
+    table = new Table();
+
+    // Otwórz plik
+    ifstream file(path);
+
+    // Sprawdź, czy udało się otworzyć plik
+    if (!file.is_open()) {
+        return false;
+    }
+
+    // Zmienna przechowująca wartość wczytaną z pliku
+    int word;
+
+    // Wyczyść flagi błędów i pozycję odczytu pliku
+    file.clear();
+    file.seekg(0, ios::beg);
+
+    //Wczytywanie danych z pliku
+    while (file >> word) {
+        table->addEnd(word);
+    }
+
+    file.close();
+    return true;
+}
+
+
+bool ManualTest::isSorted() {
+    if(sortedTable->getSize() == 0){
+        cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
+        return false;
+    }else if(sortedTable->getSize() == 1){
+        return true;
+    }
+
+
+    int first = sortedTable->get(0);
+    int second;
+
+    for(int index=1; index<sortedTable->getSize(); index++){
+        second = sortedTable->get(index);
+
+        if(first > second)return false;
+
+        first = second;
+    }
+
+    return true;
+}
+
+void ManualTest::generateTable(int size, int generatingType) {
+    //losowo, 33, 66, malejąco, rosnąco
+    switch (generatingType) {
+        case 1://todo
+            break;
+
+        case 2://todo
+            break;
+
+        case 3://todo
+            break;
+
+        case 4://todo
+            break;
+    }
+}
+
+void ManualTest::randomFULL(int size) {
+
+
+    for(int i=0; i<size; i++){
+        table->addHead(3);
+    }
+}
+

@@ -31,7 +31,7 @@ int main() {
             delete test;
         }else if(choice == 2){
             //inicjowanie pamięci na włączenie testów
-            AutoTest *test = new AutoTest;
+            AutoTest *test = new AutoTest; //todo dodać testy automatyczne
 
             delete test;
         }

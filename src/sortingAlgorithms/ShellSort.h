@@ -11,7 +11,6 @@ template<typename T>
 class ShellSort {
 private:
     Table<T>* table;
-    void sortQuick(int left, int right);
 
 public:
     ShellSort(Table<T>* table);

@@ -3,6 +3,7 @@
 #include <typeinfo>
 #include "ManualTest.h"
 #include "../sortingAlgorithms/QuickSort.h"
+#include "../sortingAlgorithms/ShellSort.h"
 
 
 using namespace std;
@@ -189,7 +190,10 @@ void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
         case 2:{//todo
             break;
         }
-        case 3:{//todo
+        case 3:{
+            ShellSort<T>* shellSort = new ShellSort(table);
+            sortedTable = shellSort->start();
+            delete shellSort;
             break;
         }
         case 4:{

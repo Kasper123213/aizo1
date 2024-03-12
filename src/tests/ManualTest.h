@@ -24,8 +24,8 @@ public:
     bool isSorted();
 
     void generateTable(int size, int generatingType);
-
     void sort(int sortingType);
+    void saveSolution();
 };
 
 

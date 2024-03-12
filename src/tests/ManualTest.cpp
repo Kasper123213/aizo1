@@ -3,7 +3,6 @@
 #include <typeinfo>
 #include "ManualTest.h"
 #include "../sortingAlgorithms/QuickSort.h"
-#include "../sortingAlgorithms/ShellSort.h"
 
 
 using namespace std;
@@ -21,6 +20,7 @@ ManualTest<T>::ManualTest(){
             <<"\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo"<<endl
             <<"\t5. Uruchom algorytm sortujący"<<endl
             <<"\t6. Pokaż tablicę po posortowaniu"<<endl
+            <<"\t7. Zapisz tablicę po posortowaniu do pliku txt"<<endl
             <<"\t0. Wyjdź z menu"<<endl
             <<">>";
 
@@ -69,9 +69,9 @@ ManualTest<T>::ManualTest(){
             }
             case 5: {
                 cout << "Wybierz rodzaj algorytmu sortującego:" << endl
-                     << "\t1. Sortowanie przez wstawianie" << endl
-                     << "\t2. Sortowanie przez kopcowanie" << endl
-                     << "\t3. Sortowanie Shella" << endl
+                     << "\t1. Sortowanie przez wstawianie (zwykłe)" << endl
+                     << "\t2. Sortowanie przez wstawianie (binarne)" << endl
+                     << "\t3. Sortowanie przez kopcowanie" << endl
                      << "\t4. Sortowanie szybkie\n>>";
 
                 int sortingType = 1;
@@ -83,6 +83,10 @@ ManualTest<T>::ManualTest(){
             case 6: {
                 if (sortedTable->getSize() > 20) cout << "Tablica za duża na wyświetlenie";
                 else sortedTable->printTable();
+                break;
+            }
+            case 7: {
+                saveSolution();
                 break;
             }
         }
@@ -182,7 +186,7 @@ void ManualTest<T>::generateTable(int size, int generatingType) {
 
 template<typename T>
 void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
-    // sortowanie przez wstawianie, przez kopcowanie, Shella i szybkie
+    //  sortowanie przez wstawianie zwykłe i binarne, przez kopcowanie (heap sort) i szybkie
     switch (sortingType) {
         case 1:{//todo
             break;
@@ -190,11 +194,7 @@ void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
         case 2:{//todo
             break;
         }
-        case 3:{
-            ShellSort<T>* shellSort = new ShellSort(table);
-            sortedTable = shellSort->start();
-            delete shellSort;
-            break;
+        case 3:{//todo
         }
         case 4:{
             QuickSort<T>* quickSort = new QuickSort(table);
@@ -203,6 +203,42 @@ void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
             break;
         }
 
+    }
+}
+
+
+
+//zapisanie rozwiązania do pliku
+template<typename T>
+void ManualTest<T>::saveSolution(){
+    int index = 1;
+    string name ;
+    while(true){
+        name = "sortedList" + to_string(index) + ".txt";
+
+        ifstream file(name);
+        if(not file.good()) break;
+        index++;
+    }
+
+    string solutionFile = name;
+
+    // Otwarcie pliku w trybie do zapisu (truncation)
+    ofstream file(solutionFile, ios::trunc);
+
+    // Sprawdzenie, czy plik został otwarty poprawnie
+    if (file.is_open()) {
+
+        for(int i=0; i< sortedTable->getSize(); i++){
+            file << sortedTable->get(i) <<endl;
+        }
+
+        // Zamknięcie pliku
+        file.close();
+
+        cout << "Zapisano do pliku." << endl;
+    } else {
+        cout << "Błąd podczas otwierania pliku." << endl;
     }
 }
 

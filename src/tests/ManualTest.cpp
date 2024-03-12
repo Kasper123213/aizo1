@@ -3,6 +3,7 @@
 #include <typeinfo>
 #include "ManualTest.h"
 #include "../sortingAlgorithms/QuickSort.h"
+#include "../sortingAlgorithms/HeapSort.h"
 
 
 using namespace std;
@@ -194,11 +195,15 @@ void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
         case 2:{//todo
             break;
         }
-        case 3:{//todo
+        case 3:{
+            HeapSort<T>* heapSort = new HeapSort(table);
+            sortedTable = heapSort->sort();
+            delete heapSort;
+            break;
         }
         case 4:{
             QuickSort<T>* quickSort = new QuickSort(table);
-            sortedTable = quickSort->start();
+            sortedTable = quickSort->sort();
             delete quickSort;
             break;
         }
@@ -222,19 +227,23 @@ void ManualTest<T>::saveSolution(){
     }
 
     string solutionFile = name;
+    string unsortedFile = "unsortedList" + to_string(index) + ".txt";
 
     // Otwarcie pliku w trybie do zapisu (truncation)
     ofstream file(solutionFile, ios::trunc);
+    ofstream file1(unsortedFile, ios::trunc);
 
     // Sprawdzenie, czy plik został otwarty poprawnie
     if (file.is_open()) {
 
         for(int i=0; i< sortedTable->getSize(); i++){
             file << sortedTable->get(i) <<endl;
+            file1 << table->get(i) <<endl;
         }
 
         // Zamknięcie pliku
         file.close();
+        file1.close();
 
         cout << "Zapisano do pliku." << endl;
     } else {

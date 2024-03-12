@@ -4,7 +4,7 @@
 
 
 
-#include "../table/Table.h"
+#include "../structures//Table.h"
 #include <windows.h>
 
 template<typename T>

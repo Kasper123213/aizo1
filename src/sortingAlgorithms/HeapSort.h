@@ -5,19 +5,19 @@
 #ifndef AIZO1_HEAPSORT_H
 #define AIZO1_HEAPSORT_H
 
-#include "../table/Table.h"
+#include "../structures/Table.h"
+#include "../structures/Heap.h"
 
 template<typename T>
 class HeapSort {
 private:
     Table<T>* table;
-    void sortQuick(int left, int right);
 
 public:
     HeapSort(Table<T>* table);
     ~HeapSort();
 
-    Table<T>* start();
+    Table<T>* sort();
 };
 
 

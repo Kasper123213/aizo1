@@ -3,7 +3,7 @@
 #define AIZO1_QUICKSORT_H
 
 
-#include "../table/Table.h"
+#include "../structures//Table.h"
 
 template<typename T>
 class QuickSort {
@@ -15,7 +15,7 @@ public:
     QuickSort(Table<T>* table);
     ~QuickSort();
 
-    Table<T>* start();
+    Table<T>* sort();
 };
 
 

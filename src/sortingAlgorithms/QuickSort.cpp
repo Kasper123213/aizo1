@@ -14,7 +14,7 @@ QuickSort<T>::~QuickSort(){
 }
 
 template<typename T>
-Table<T>* QuickSort<T>::start(){
+Table<T>* QuickSort<T>::sort(){
     sortQuick(0, table->getSize()-1);
     return table;
 }

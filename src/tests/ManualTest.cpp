@@ -4,6 +4,8 @@
 #include "ManualTest.h"
 #include "../sortingAlgorithms/QuickSort.h"
 #include "../sortingAlgorithms/HeapSort.h"
+#include "../sortingAlgorithms/InsertionSort.h"
+#include "../sortingAlgorithms/BinaryInsertionSort.h"
 
 
 using namespace std;
@@ -189,10 +191,16 @@ template<typename T>
 void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
     //  sortowanie przez wstawianie zwykłe i binarne, przez kopcowanie (heap sort) i szybkie
     switch (sortingType) {
-        case 1:{//todo
+        case 1:{
+            InsertionSort<T>* insertionSort = new InsertionSort(table);
+            sortedTable = insertionSort->sort();
+            delete insertionSort;
             break;
         }
-        case 2:{//todo
+        case 2:{
+            BinaryInsertionSort<T>* binaryInsertionSort = new BinaryInsertionSort(table);
+            sortedTable = binaryInsertionSort->sort();
+            delete binaryInsertionSort;
             break;
         }
         case 3:{

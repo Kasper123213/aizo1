@@ -5,6 +5,8 @@
 #ifndef AIZO1_HEAP_H
 #define AIZO1_HEAP_H
 
+#include "Table.h"
+
 template<typename T>
 class Heap {
 public:
@@ -14,6 +16,12 @@ public:
     ~Heap();
 
     void add(T value);
+
+    void set(int index, T value);
+
+    void sortAfterSetting();
+
+    void setSize(int size);
 
     T getRoot();
 

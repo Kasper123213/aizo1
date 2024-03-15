@@ -5,8 +5,10 @@
 template<typename T>
 InsertionSort<T>::InsertionSort(Table<T>* table){
     this->table = new Table<T>();
+    this->table->setSize(table->getSize());
+
     for(int i = 0; i<table->getSize(); i++){
-        this->table->addEnd(table->get(i));
+        this->table->set(i, table->get(i));
     }
 }
 

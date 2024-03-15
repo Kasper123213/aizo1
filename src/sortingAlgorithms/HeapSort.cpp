@@ -1,12 +1,14 @@
-
+#include <iostream>
 #include "HeapSort.h"
 
 
 template<typename T>
 HeapSort<T>::HeapSort(Table<T>* table){
     this->table = new Table<T>();
+    this->table->setSize(table->getSize());
+
     for(int i = 0; i<table->getSize(); i++){
-        this->table->addEnd(table->get(i));
+        this->table->set(i, table->get(i));
     }
 }
 
@@ -18,14 +20,15 @@ template<typename T>
 Table<T>* HeapSort<T>::sort(){
     Heap<T>* heap = new Heap<T>();
 
-    for(int i=0; i<table->getSize(); i++){
-        heap->add(table->get(i));
+    heap->setSize(table->getSize());
+    for(int i = 0; i<table->getSize(); i++){
+        heap->set(i, table->get(i));
     }
 
-    table->clear();
+    heap->sortAfterSetting();
 
-    while(heap->getSize()>0){
-        table->addHead(heap->getRoot());
+    for(int index = heap->getSize()-1; index>=0; index--){
+        table->set(index, heap->getRoot());
     }
 
     delete heap;

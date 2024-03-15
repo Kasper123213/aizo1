@@ -21,23 +21,47 @@ Heap<T>::~Heap() {
 }
 
 template<typename T>
-void Heap<T>::add(T value) {
-    T *newTable = new T[size + 1];
-
-    for (int i = 0; i < size; i++) {    //przepisujemy starą tablicę
-        newTable[i] = table[i];
-    }
-
-    newTable[size] = value;   //wpisujemy nową wartość na koniec tablicy
-
-    delete[] table;   //usuwanie starej tablicy
-
-    table = newTable; //przypisywanie tablicy do zmiennej globalnej
-
-    size++;  //inkrementacja rozmiaru tablicy
-
-    sortAfterAdding(); //przywracamy wlasnosc kopca
+void Heap<T>::set(int index, T value) {
+    table[index] = value;
 }
+template<typename T>
+void Heap<T>::sortAfterSetting() {
+    for(int i = 2; i<=size;i++){
+        int j = i;
+        int k = j/2;
+        T x = table[i-1];
+
+        while(k>0 and table[k-1]<x){
+            table[j-1] = table[k-1];
+            j=k;
+            k=j/2;
+        }
+        table[j-1] = x;
+    }
+}
+template<typename T>
+void Heap<T>::setSize(int size) {
+    this->size = size;
+    this->table = new T[size];
+}
+//template<typename T>
+//void Heap<T>::add(T value) {
+//    T *newTable = new T[size + 1];
+//
+//    for (int i = 0; i < size; i++) {    //przepisujemy starą tablicę
+//        newTable[i] = table[i];
+//    }
+//
+//    newTable[size] = value;   //wpisujemy nową wartość na koniec tablicy
+//
+//    delete[] table;   //usuwanie starej tablicy
+//
+//    table = newTable; //przypisywanie tablicy do zmiennej globalnej
+//
+//    size++;  //inkrementacja rozmiaru tablicy
+//
+//    sortAfterAdding(); //przywracamy wlasnosc kopca
+//}
 
 
 template<typename T>

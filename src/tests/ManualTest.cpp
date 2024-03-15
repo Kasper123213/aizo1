@@ -6,6 +6,7 @@
 #include "../sortingAlgorithms/HeapSort.h"
 #include "../sortingAlgorithms/InsertionSort.h"
 #include "../sortingAlgorithms/BinaryInsertionSort.h"
+#include "../time/Time.h"
 
 
 using namespace std;
@@ -58,7 +59,6 @@ ManualTest<T>::ManualTest(){
                 break;
             }
             case 3: {
-                if (table->getSize() > 20) cout << "Tablica za duża na wyświetlenie";
                 table->printTable();
                 break;
             }
@@ -161,7 +161,6 @@ bool ManualTest<T>::isSorted() {
 
 template<typename T>
 void ManualTest<T>::generateTable(int size, int generatingType) {
-    table->clear();
     //losowo, 33, 66, malejąco, rosnąco
     switch (generatingType) {
         case 1:
@@ -181,42 +180,63 @@ void ManualTest<T>::generateTable(int size, int generatingType) {
             break;
 
         case 5:
-            table->randomGrowing(size);
+            table->randomPercent(size, 100);
             break;
     }
 }
 
 
 template<typename T>
-void ManualTest<T>::sort(int sortingType) {//todo pomiary czasu
+void ManualTest<T>::sort(int sortingType) {
+    Time* time = new Time();
     //  sortowanie przez wstawianie zwykłe i binarne, przez kopcowanie (heap sort) i szybkie
     switch (sortingType) {
         case 1:{
             InsertionSort<T>* insertionSort = new InsertionSort(table);
+
+            time->start();
             sortedTable = insertionSort->sort();
+            long exTime = time->getTime();
+            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+
             delete insertionSort;
             break;
         }
         case 2:{
             BinaryInsertionSort<T>* binaryInsertionSort = new BinaryInsertionSort(table);
+
+            time->start();
             sortedTable = binaryInsertionSort->sort();
+            long exTime = time->getTime();
+            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+
             delete binaryInsertionSort;
             break;
         }
         case 3:{
             HeapSort<T>* heapSort = new HeapSort(table);
+
+            time->start();
             sortedTable = heapSort->sort();
+            long exTime = time->getTime();
+            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+
             delete heapSort;
             break;
         }
-        case 4:{
-            QuickSort<T>* quickSort = new QuickSort(table);
+        case 4: {
+            QuickSort<T> *quickSort = new QuickSort(table);
+
+            time->start();
             sortedTable = quickSort->sort();
+            long exTime = time->getTime();
+            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+
             delete quickSort;
             break;
         }
-
     }
+    delete time;
 }
 
 

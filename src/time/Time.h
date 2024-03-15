@@ -6,7 +6,7 @@
 
 using namespace std;
 using namespace std::chrono;
-class Czas {
+class Time {
 private:
     high_resolution_clock::time_point startTime;
     high_resolution_clock::time_point endTime;

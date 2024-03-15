@@ -58,9 +58,10 @@ public:
     void swap(int i, int j);
     void set(int i, T value);
 
+    void setSize(int size);
+
     void randomFULL(int size);
     void randomPercent(int size, int percent);
-    void randomGrowing(int size);
     void randomDescending(int size);
 
 };

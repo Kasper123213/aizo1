@@ -154,6 +154,10 @@ T Table<T>::searchValue(T value) {
 //metoda drujukujaca kolejne elementy tablicy w formacie [i] T[i]
 template<typename T>
 void Table<T>::printTable() {
+    if (tableSize > 20){
+        cout << "Tablica za duża na wyświetlenie :"<<tableSize<<" elementów"<<endl;
+        return;
+    }
     cout<<"####################################################################################"<<endl;
     if (tableSize <= 0) {
         cout << "Tablica pusta" << endl;
@@ -170,7 +174,7 @@ template<typename T>
 void Table<T>::setTable(T *newTable, int size) {
     delete[]head;
     head = newTable;
-    tableSize=size;
+    tableSize =size;
 }
 
 template<typename T>
@@ -188,28 +192,29 @@ T Table<T>::get(int index){
 
 template<typename T>
 void Table<T>::randomFULL(int size) {
+    setSize(size);
     random_device rd;
     mt19937 gen(rd());
+    T max, min;
+
+    if(size<=20) {
+        max = 99; //dodane w celu ułatwienia prowadzenia testów manualnych
+        min = 0;  //i łatwiejszego sprawdzania wizualnie porawności algorytmów
+    }
+    else{
+        max = numeric_limits<T>::max();
+        min = numeric_limits<T>::min();
+    }
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
-        T max;
-
-        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-        else max = numeric_limits<T>::max();
-
-        uniform_real_distribution<T> dis(0, max);
+        uniform_real_distribution<T> dis(min, max);
         for (int i = 0; i < size; i++) {
-            addEnd(dis(gen));
+                head[i] = dis(gen);
         }
     } else {
-        T max;
-
-        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-        else max = numeric_limits<T>::max();
-
         uniform_int_distribution<T> dis(0, max);
         for (int i = 0; i < size; i++) {
-            addEnd(dis(gen));
+                head[i] = dis(gen);
         }
     }
 }
@@ -217,31 +222,32 @@ void Table<T>::randomFULL(int size) {
 
 template<typename T>
 void Table<T>::randomPercent(int size, int percent) {
+    setSize(size);
     random_device rd;
     mt19937 gen(rd());
+    T max, min;
     int sorted = size * percent / 100;
 
-    for(T i = 0;i<sorted;i++){
-        addEnd(T(i));
+    if(size<=20) {
+        max = 99; //dodane w celu ułatwienia prowadzenia testów manualnych
+    }           //i łatwiejszego sprawdzania wizualnie porawności algorytmów
+    else{
+        max = numeric_limits<T>::max();
+    }
+
+    for(int i = 0;i<sorted;i++){
+        head[i] = T(i);
     }
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
-        T max;
-
-        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-        else max = numeric_limits<T>::max();
         uniform_real_distribution<T> dis(sorted, max);
         for (int i = sorted; i < size; i++) {
-            addEnd(dis(gen));
+                head[i] = dis(gen);
         }
     } else {
-        T max;
-        if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-        else max = numeric_limits<T>::max();
-
         uniform_int_distribution<T> dis(sorted, max);
         for (int i = sorted; i < size; i++) {
-            addEnd(dis(gen));
+                head[i] = dis(gen);
         }
     }
 }
@@ -249,25 +255,16 @@ void Table<T>::randomPercent(int size, int percent) {
 
 template<typename T>
 void Table<T>::randomDescending(int size) {
+    setSize(size);
     T max;
 
     if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-    else max = numeric_limits<T>::max();
+    else max = numeric_limits<T>::max();//i łatwiejszego sprawdzania wizualnie porawności algorytmów
 
+    int index = 0;
     for(T i = max; i > max - size; i--){
-        addEnd(i);
-    }
-}
-
-template<typename T>
-void Table<T>::randomGrowing(int size) {
-    T max;
-
-    if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-    else max = numeric_limits<T>::max();
-
-    for(T i = max - size; i < max; i++){
-        addEnd(i);
+        head[index] = i;
+        index ++;
     }
 }
 
@@ -278,6 +275,14 @@ void Table<T>::swap(int i, int j) {
 template<typename T>
 void Table<T>::set(int i, T value) {
     head[i] = value;
+}
+
+template<typename T>
+void Table<T>::setSize(int size) {
+    tableSize = size;
+    delete []head;
+    head = new T[size];
+
 }
 
 // Deklaracja szablonów klasowych

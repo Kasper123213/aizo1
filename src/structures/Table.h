@@ -64,6 +64,8 @@ public:
     void randomPercent(int size, int percent);
     void randomDescending(int size);
 
+    bool isSorted();
+
 };
 
 

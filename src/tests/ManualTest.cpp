@@ -63,7 +63,7 @@ ManualTest<T>::ManualTest(){
                 break;
             }
             case 4: {
-                if (isSorted()) {
+                if (sortedTable->isSorted()) {
                     cout << "Tablica posortowana poprawnie" << endl;
                 } else {
                     cout << "Tablica posortowana niepoprawnie" << endl;
@@ -100,14 +100,16 @@ ManualTest<T>::ManualTest(){
 template<typename T>
 ManualTest<T>::~ManualTest() {
     delete table;
+    sortedTable->printTable();
     delete sortedTable;
 }
 
 
 template<typename T>
-bool ManualTest<T>::readFromFile(string path){
+bool ManualTest<T>::readFromFile(string path){//todo zmienic scieżkę
     path = "C:\\Users\\radom\\OneDrive\\Pulpit\\aizo\\aizo1\\testTables\\table1.txt";
     table->clear();
+    sortedTable->clear();
 
     // Otwórz plik
     ifstream file(path);
@@ -134,33 +136,34 @@ bool ManualTest<T>::readFromFile(string path){
 }
 
 
-template<typename T>
-bool ManualTest<T>::isSorted() {
-    if(sortedTable->getSize() == 0){
-        cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
-        return false;
-    }else if(sortedTable->getSize() == 1){
-        return true;
-    }
-
-
-    T first = sortedTable->get(0);
-    T second;
-
-    for(int index=1; index<sortedTable->getSize(); index++){
-        second = sortedTable->get(index);
-
-        if(first > second)return false;
-
-        first = second;
-    }
-
-    return true;
-}
+//template<typename T>
+//bool ManualTest<T>::isSorted() {
+//    if(sortedTable->getSize() == 0){
+//        cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
+//        return false;
+//    }else if(sortedTable->getSize() == 1){
+//        return true;
+//    }
+//
+//
+//    T first = sortedTable->get(0);
+//    T second;
+//
+//    for(int index=1; index<sortedTable->getSize(); index++){
+//        second = sortedTable->get(index);
+//
+//        if(first > second)return false;
+//
+//        first = second;
+//    }
+//
+//    return true;
+//}
 
 
 template<typename T>
 void ManualTest<T>::generateTable(int size, int generatingType) {
+    sortedTable->clear();
     //losowo, 33, 66, malejąco, rosnąco
     switch (generatingType) {
         case 1:
@@ -283,4 +286,3 @@ void ManualTest<T>::saveSolution(){
 // Deklaracja szablonów klasowych
 template class ManualTest<int>;
 template class ManualTest<float>;
-template class ManualTest<unsigned long long>;

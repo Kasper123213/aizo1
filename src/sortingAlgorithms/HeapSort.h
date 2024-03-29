@@ -14,6 +14,7 @@ public:
     HeapSort(Table<T>* table);
     ~HeapSort();
 
+    void setNewTable(Table<T>* table);
     Table<T>* sort();
 };
 

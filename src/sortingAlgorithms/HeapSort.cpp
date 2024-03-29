@@ -16,6 +16,19 @@ template<typename T>
 HeapSort<T>::~HeapSort(){
 }
 
+
+template<typename T>
+void HeapSort<T>::setNewTable(Table<T> *table) {
+    delete table;
+    table = new Table<T>();
+    this->table->setSize(table->getSize());
+
+    for(int i = 0; i<table->getSize(); i++){
+        this->table->set(i, table->get(i));
+    }
+}
+
+
 template<typename T>
 Table<T>* HeapSort<T>::sort(){
     Heap<T>* heap = new Heap<T>();
@@ -40,4 +53,3 @@ Table<T>* HeapSort<T>::sort(){
 // Deklaracja szablonów klasowych
 template class HeapSort<int>;
 template class HeapSort<float>;
-template class HeapSort<unsigned long long>;

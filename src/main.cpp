@@ -34,7 +34,6 @@ int main() {
             cout<<"Na jakim typie danych chcesz operować?"<<endl
             <<"\t1. int"<<endl
             <<"\t2. float"<<endl
-            <<"\t3. unsigned long long"<<endl
             <<">>";
 
             cin>>dataType;
@@ -47,11 +46,6 @@ int main() {
                 }
                 case 2: {
                     ManualTest<float> *test = new ManualTest<float>();
-                    delete test;
-                    break;
-                }
-                case 3: {
-                    ManualTest<unsigned long long> *test = new ManualTest<unsigned long long>();
                     delete test;
                     break;
                 }

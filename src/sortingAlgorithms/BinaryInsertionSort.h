@@ -13,6 +13,7 @@ public:
     BinaryInsertionSort(Table<T>* table);
     ~BinaryInsertionSort();
 
+    void setNewTable(Table<T>* table);
     Table<T>* sort();
 };
 

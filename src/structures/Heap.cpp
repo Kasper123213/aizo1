@@ -145,4 +145,3 @@ int Heap<T>::getSize() { return size; }  //metoda zwracajaca ilosc wezlow w kopc
 // Deklaracja szablonów klasowych
 template class Heap<int>;
 template class Heap<float>;
-template class Heap<unsigned long long>;

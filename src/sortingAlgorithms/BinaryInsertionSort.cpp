@@ -17,6 +17,19 @@ template<typename T>
 BinaryInsertionSort<T>::~BinaryInsertionSort(){
 }
 
+
+template<typename T>
+void BinaryInsertionSort<T>::setNewTable(Table<T> *table) {
+    delete table;
+    table = new Table<T>();
+    this->table->setSize(table->getSize());
+
+    for(int i = 0; i<table->getSize(); i++){
+        this->table->set(i, table->get(i));
+    }
+}
+
+
 template<typename T>
 Table<T>* BinaryInsertionSort<T>::sort(){
 
@@ -47,4 +60,3 @@ Table<T>* BinaryInsertionSort<T>::sort(){
 // Deklaracja szablonów klasowych
 template class BinaryInsertionSort<int>;
 template class BinaryInsertionSort<float>;
-template class BinaryInsertionSort<unsigned long long>;

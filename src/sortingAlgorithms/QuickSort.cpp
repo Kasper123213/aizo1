@@ -15,6 +15,18 @@ template<typename T>
 QuickSort<T>::~QuickSort(){
 }
 
+
+template<typename T>
+void QuickSort<T>::setNewTable(Table<T> *table) {
+    delete table;
+    table = new Table<T>();
+    this->table->setSize(table->getSize());
+
+    for(int i = 0; i<table->getSize(); i++){
+        this->table->set(i, table->get(i));
+    }
+}
+
 template<typename T>
 Table<T>* QuickSort<T>::sort(){
     sortQuick(0, table->getSize()-1);
@@ -53,4 +65,3 @@ void QuickSort<T>::sortQuick(int left, int right){
 // Deklaracja szablonów klasowych
 template class QuickSort<int>;
 template class QuickSort<float>;
-template class QuickSort<unsigned long long>;

@@ -4,7 +4,7 @@
 
 
 
-#include "../structures//Table.h"
+#include "../structures/Table.h"
 #include <windows.h>
 
 template<typename T>
@@ -21,7 +21,7 @@ public:
     ~ManualTest();
 
     bool readFromFile(std::string);
-    bool isSorted();
+//    bool isSorted();
 
     void generateTable(int size, int generatingType);
     void sort(int sortingType);

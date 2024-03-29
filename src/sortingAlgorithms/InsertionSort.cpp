@@ -16,6 +16,20 @@ template<typename T>
 InsertionSort<T>::~InsertionSort(){
 }
 
+
+template<typename T>
+void InsertionSort<T>::setNewTable(Table<T> *table) {
+    delete this->table;
+    this->table = new Table<T>();
+    this->table->setSize(table->getSize());
+
+    for(int i = 0; i<table->getSize(); i++){
+        this->table->set(i, table->get(i));
+    }
+
+}
+
+
 template<typename T>
 Table<T>* InsertionSort<T>::sort(){
     T x;
@@ -39,4 +53,3 @@ Table<T>* InsertionSort<T>::sort(){
 // Deklaracja szablonów klasowych
 template class InsertionSort<int>;
 template class InsertionSort<float>;
-template class InsertionSort<unsigned long long>;

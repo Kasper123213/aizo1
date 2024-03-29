@@ -13,6 +13,7 @@ public:
     InsertionSort(Table<T>* table);
     ~InsertionSort();
 
+    void setNewTable(Table<T>* table);
     Table<T>* sort();
 };
 

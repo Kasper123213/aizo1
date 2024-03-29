@@ -15,6 +15,7 @@ public:
     QuickSort(Table<T>* table);
     ~QuickSort();
 
+    void setNewTable(Table<T>* table);
     Table<T>* sort();
 };
 

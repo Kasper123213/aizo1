@@ -15,6 +15,7 @@ template<typename T>
 Table<T>::~Table() {   //zwalnianie pamięci po tablicy
     if (head != nullptr) {
         delete[]head;
+        head = nullptr;
     }
     tableSize = 0;
 
@@ -285,7 +286,30 @@ void Table<T>::setSize(int size) {
 
 }
 
+template<typename T>
+bool Table<T>::isSorted() {
+    if(tableSize == 0){
+        cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
+        return false;
+    }else if(tableSize == 1){
+        return true;
+    }
+
+
+    T first = get(0);
+    T second;
+
+    for(int index=1; index<tableSize; index++){
+        second = get(index);
+
+        if(first > second)return false;
+
+        first = second;
+    }
+
+    return true;
+}
+
 // Deklaracja szablonów klasowych
 template class Table<int>;
 template class Table<float>;
-template class Table<unsigned long long>;

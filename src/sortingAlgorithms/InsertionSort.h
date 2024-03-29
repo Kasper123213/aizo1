@@ -5,7 +5,7 @@
 #include "../structures/Table.h"
 
 template<typename T>
-class InsertionSort {
+class InsertionSort{
 private:
     Table<T>* table;
 

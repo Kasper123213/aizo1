@@ -3,10 +3,10 @@
 #define AIZO1_QUICKSORT_H
 
 
-#include "../structures//Table.h"
+#include "../structures/Table.h"
 
 template<typename T>
-class QuickSort {
+class QuickSort{
 private:
     Table<T>* table;
     void sortQuick(int left, int right);

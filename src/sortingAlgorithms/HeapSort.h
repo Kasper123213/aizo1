@@ -6,7 +6,7 @@
 #include "../structures/Heap.h"
 
 template<typename T>
-class HeapSort {
+class HeapSort{
 private:
     Table<T>* table;
 

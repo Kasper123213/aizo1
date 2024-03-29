@@ -4,8 +4,9 @@
 
 #include "../structures/Table.h"
 
+
 template<typename T>
-class BinaryInsertionSort {
+class BinaryInsertionSort{
 private:
     Table<T>* table;
 

@@ -42,123 +42,162 @@ AutoTest::AutoTest() {
 
 
 
-//InsertSort
 
-    //int
-        //todo fullrandom
-    Table<int>* table = new Table<int>;
-    Table<int>* sortedTable = new Table<int>;
-    InsertionSort<int>* insertionSort = new InsertionSort(table);
+
+
+
+
+
+//###########################               int
+    runTest<int>();
+
+//###########################               float
+    runTest<float>();
+}
+
+
+
+
+AutoTest::~AutoTest() {
+
+}
+
+template<typename T>
+void AutoTest::runTest() {
+
+
+
+    Table<T>* table = new Table<T>;
+    Table<T>* sortedTable = new Table<T>;
+
+//InsertSort
+    InsertionSort<T>* insertionSort = new InsertionSort(table);
+
+    //todo fullrandom
     table->randomFULL(5);
     insertionSort->setNewTable(table);
 
     sortedTable = insertionSort->sort();
 
+    cout<<endl<<endl<<endl;
+    table->printTable();
     sortedTable->printTable();
-    if(sortedTable->isSorted()) {
-        std::cout<<"zrobione"<<std::endl;
-        delete insertionSort;
-        delete table;
-        delete sortedTable;
-    }
-    else{
-        std::cout<<"zepsulo sie"<<std::endl;
-        delete insertionSort;
-        delete table;
-        delete sortedTable;
+
+    if(not sortedTable->isSorted()) {
+        std::cout<<"Sortowanie nie powiodło się"<<std::endl;
         return;
     }
-        //todo malejacy random
 
-        //todo sorted100
+    //todo malejacy random
+    table->randomDescending(5);
+    insertionSort->setNewTable(table);
 
-        //todo sorted 66
+    sortedTable = insertionSort->sort();
 
-        //todo sorted 33
+    cout<<endl<<endl<<endl;
+    table->printTable();
+    sortedTable->printTable();
 
-    //float
-        //todo fullrandom
+    if(not sortedTable->isSorted()) {
+        std::cout<<"Sortowanie nie powiodło się"<<std::endl;
+        return;
+    }
 
-        //todo malejacy random
 
-        //todo sorted100
+    //todo sorted100
+    table->randomPercent(5, 100);
+    insertionSort->setNewTable(table);
 
-        //todo sorted 66
+    sortedTable = insertionSort->sort();
 
-        //todo sorted 33
+    cout<<endl<<endl<<endl;
+    table->printTable();
+    sortedTable->printTable();
+
+    if(not sortedTable->isSorted()) {
+        std::cout<<"Sortowanie nie powiodło się"<<std::endl;
+        return;
+    }
+
+    //todo sorted 66
+    table->randomPercent(5, 66);
+    insertionSort->setNewTable(table);
+
+    sortedTable = insertionSort->sort();
+
+    cout<<endl<<endl<<endl;
+    table->printTable();
+    sortedTable->printTable();
+
+    if(not sortedTable->isSorted()) {
+        std::cout<<"Sortowanie nie powiodło się"<<std::endl;
+        return;
+    }
+
+    //todo sorted 33
+    table->randomPercent(5, 33);
+    insertionSort->setNewTable(table);
+
+    sortedTable = insertionSort->sort();
+
+    cout<<endl<<endl<<endl;
+    table->printTable();
+    sortedTable->printTable();
+
+    if(not sortedTable->isSorted()) {
+        std::cout<<"Sortowanie nie powiodło się"<<std::endl;
+        return;
+    }
+
+
+
+
+    delete insertionSort;
 
 //binary insert
-    //int
-        //todo fullrandom
 
-        //todo malejacy random
+    //todo fullrandom
 
-        //todo sorted100
+    //todo malejacy random
 
-        //todo sorted 66
+    //todo sorted100
 
-        //todo sorted 33
+    //todo sorted 66
 
-    //float
-        //todo fullrandom
+    //todo sorted 33
 
-        //todo malejacy random
-
-        //todo sorted100
-
-        //todo sorted 66
-
-        //todo sorted 33
 
 //heapsort
-    //int
-        //todo fullrandom
 
-        //todo malejacy random
+    //todo fullrandom
 
-        //todo sorted100
+    //todo malejacy random
 
-        //todo sorted 66
+    //todo sorted100
 
-        //todo sorted 33
+    //todo sorted 66
 
-    //float
-        //todo fullrandom
+    //todo sorted 33
 
-        //todo malejacy random
-
-        //todo sorted100
-
-        //todo sorted 66
-
-        //todo sorted 33
 
 //qs
-    //int
-        //todo fullrandom
 
-        //todo malejacy random
+    //todo fullrandom
 
-        //todo sorted100
+    //todo malejacy random
 
-        //todo sorted 66
+    //todo sorted100
 
-        //todo sorted 33
+    //todo sorted 66
 
-    //float
-        //todo fullrandom
-
-        //todo malejacy random
-
-        //todo sorted100
-
-        //todo sorted 66
-
-        //todo sorted 33
+    //todo sorted 33
 
 
+
+
+
+
+    delete table;
+    delete sortedTable;
 }
 
-AutoTest::~AutoTest() {
-
-}

@@ -213,7 +213,7 @@ void Table<T>::randomFULL(int size) {
                 head[i] = dis(gen);
         }
     } else {
-        uniform_int_distribution<T> dis(0, max);
+        uniform_int_distribution<T> dis(min, max);
         for (int i = 0; i < size; i++) {
                 head[i] = dis(gen);
         }
@@ -227,17 +227,19 @@ void Table<T>::randomPercent(int size, int percent) {
     random_device rd;
     mt19937 gen(rd());
     T max, min;
-    int sorted = size * percent / 100;
+    int sorted = size * percent / 100 + T(0.1);
 
     if(size<=20) {
         max = 99; //dodane w celu ułatwienia prowadzenia testów manualnych
+        min = 0;
     }           //i łatwiejszego sprawdzania wizualnie porawności algorytmów
     else{
         max = numeric_limits<T>::max();
+        min = numeric_limits<T>::min();
     }
 
-    for(int i = 0;i<sorted;i++){
-        head[i] = T(i);
+    for(int i = int(min);i<sorted;i++){
+        head[i] = T(i) + T(0.1);
     }
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
@@ -264,7 +266,7 @@ void Table<T>::randomDescending(int size) {
 
     int index = 0;
     for(T i = max; i > max - size; i--){
-        head[index] = i;
+        head[index] = i - T(0.1);
         index ++;
     }
 }

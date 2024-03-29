@@ -11,6 +11,9 @@ public:
     ~AutoTest();
 
 private:
+    template<typename T>
+    void runTest();
+
 };
 
 

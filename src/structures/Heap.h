@@ -1,6 +1,3 @@
-//
-// Created by radom on 12.03.2024.
-//
 
 #ifndef AIZO1_HEAP_H
 #define AIZO1_HEAP_H

@@ -198,14 +198,10 @@ void Table<T>::randomFULL(int size) {
     mt19937 gen(rd());
     T max, min;
 
-    if(size<=20) {
-        max = 99; //dodane w celu ułatwienia prowadzenia testów manualnych
-        min = 0;  //i łatwiejszego sprawdzania wizualnie porawności algorytmów
-    }
-    else{
-        max = numeric_limits<T>::max();
-        min = numeric_limits<T>::min();
-    }
+
+    max = numeric_limits<T>::max();
+    min = numeric_limits<T>::min();
+
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
         uniform_real_distribution<T> dis(min, max);
@@ -227,28 +223,29 @@ void Table<T>::randomPercent(int size, int percent) {
     random_device rd;
     mt19937 gen(rd());
     T max, min;
-    int sorted = size * percent / 100 + T(0.1);
+    T sorted = size * percent / 100;
 
-    if(size<=20) {
-        max = 99; //dodane w celu ułatwienia prowadzenia testów manualnych
-        min = 0;
-    }           //i łatwiejszego sprawdzania wizualnie porawności algorytmów
-    else{
-        max = numeric_limits<T>::max();
-        min = numeric_limits<T>::min();
-    }
 
-    for(int i = int(min);i<sorted;i++){
-        head[i] = T(i) + T(0.1);
-    }
+    max = numeric_limits<T>::max();
+    min = numeric_limits<T>::min();
+
 
     if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
-        uniform_real_distribution<T> dis(sorted, max);
+        for(int i = 0; i<sorted;i++){
+            head[i] = (i+1) * min;
+        }
+
+        uniform_real_distribution<T> dis(min * sorted, max);
         for (int i = sorted; i < size; i++) {
                 head[i] = dis(gen);
         }
     } else {
-        uniform_int_distribution<T> dis(sorted, max);
+        for(int i = 0; i<sorted;i++){
+            head[i] = min + i;
+        }
+
+
+        uniform_int_distribution<T> dis(min + sorted, max);
         for (int i = sorted; i < size; i++) {
                 head[i] = dis(gen);
         }
@@ -259,16 +256,21 @@ void Table<T>::randomPercent(int size, int percent) {
 template<typename T>
 void Table<T>::randomDescending(int size) {
     setSize(size);
-    T max;
 
-    if(size<=20) max = 99; //dodant w calu ułatwienia prowadzenia testów manualnych
-    else max = numeric_limits<T>::max();//i łatwiejszego sprawdzania wizualnie porawności algorytmów
+    if constexpr (is_same<float, T>::value || is_same<double, T>::value) {
+        T min = numeric_limits<T>::min();
 
-    int index = 0;
-    for(T i = max; i > max - size; i--){
-        head[index] = i - T(0.1);
-        index ++;
+        for(int i = 1; i<=size;i++){
+            head[size - i] = (i) * min;
+        }
+    }else{
+        T max = numeric_limits<T>::max();
+
+        for(int i = 0; i<size;i++){
+            head[i] = max - i;
+        }
     }
+
 }
 
 template<typename T>

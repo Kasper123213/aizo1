@@ -4,7 +4,6 @@
 #include <windows.h>
 #include "tests/ManualTest.h"
 #include "tests/AutoTest.h"
-#include "structures/Heap.h"
 
 using namespace std;
 

@@ -44,24 +44,6 @@ void Heap<T>::setSize(int size) {
     this->size = size;
     this->table = new T[size];
 }
-//template<typename T>
-//void Heap<T>::add(T value) {
-//    T *newTable = new T[size + 1];
-//
-//    for (int i = 0; i < size; i++) {    //przepisujemy starą tablicę
-//        newTable[i] = table[i];
-//    }
-//
-//    newTable[size] = value;   //wpisujemy nową wartość na koniec tablicy
-//
-//    delete[] table;   //usuwanie starej tablicy
-//
-//    table = newTable; //przypisywanie tablicy do zmiennej globalnej
-//
-//    size++;  //inkrementacja rozmiaru tablicy
-//
-//    sortAfterAdding(); //przywracamy wlasnosc kopca
-//}
 
 
 template<typename T>

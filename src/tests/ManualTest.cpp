@@ -100,14 +100,12 @@ ManualTest<T>::ManualTest(){
 template<typename T>
 ManualTest<T>::~ManualTest() {
     delete table;
-    sortedTable->printTable();
     delete sortedTable;
 }
 
 
 template<typename T>
-bool ManualTest<T>::readFromFile(string path){//todo zmienic scieżkę
-    path = "C:\\Users\\radom\\OneDrive\\Pulpit\\aizo\\aizo1\\testTables\\table1.txt";
+bool ManualTest<T>::readFromFile(string path){
     table->clear();
     sortedTable->clear();
 
@@ -134,31 +132,6 @@ bool ManualTest<T>::readFromFile(string path){//todo zmienic scieżkę
     file.close();
     return true;
 }
-
-
-//template<typename T>
-//bool ManualTest<T>::isSorted() {
-//    if(sortedTable->getSize() == 0){
-//        cout<<"Nie uruchomiono algorytmu sortowania. Tablica posortowana jest pusta"<<endl;
-//        return false;
-//    }else if(sortedTable->getSize() == 1){
-//        return true;
-//    }
-//
-//
-//    T first = sortedTable->get(0);
-//    T second;
-//
-//    for(int index=1; index<sortedTable->getSize(); index++){
-//        second = sortedTable->get(index);
-//
-//        if(first > second)return false;
-//
-//        first = second;
-//    }
-//
-//    return true;
-//}
 
 
 template<typename T>
@@ -251,8 +224,8 @@ void ManualTest<T>::saveSolution(){
     string name ;
     while(true){
         name = "sortedList" + to_string(index) + ".txt";
-
         ifstream file(name);
+        break; //todo usunąć to
         if(not file.good()) break;
         index++;
     }
@@ -261,19 +234,19 @@ void ManualTest<T>::saveSolution(){
     string unsortedFile = "unsortedList" + to_string(index) + ".txt";
 
     // Otwarcie pliku w trybie do zapisu (truncation)
-    ofstream file(solutionFile, ios::trunc);
+//    ofstream file(solutionFile, ios::trunc);//todo usunąć to tak jak bylo
     ofstream file1(unsortedFile, ios::trunc);
 
     // Sprawdzenie, czy plik został otwarty poprawnie
-    if (file.is_open()) {
+    if (file1.is_open()) {
 
-        for(int i=0; i< sortedTable->getSize(); i++){
-            file << sortedTable->get(i) <<endl;
+        for(int i=0; i< table->getSize(); i++){
+//            file << sortedTable->get(i) <<endl;
             file1 << table->get(i) <<endl;
         }
 
         // Zamknięcie pliku
-        file.close();
+//        file.close();
         file1.close();
 
         cout << "Zapisano do pliku." << endl;

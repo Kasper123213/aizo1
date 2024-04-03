@@ -4,6 +4,7 @@
 void Time::start() {
     startTime = high_resolution_clock::now();
 }
+
 //wyłączanie "stopera", zapisywanie obecnego czasu do zmiennej stopTime
 void Time::stop() {
     endTime = high_resolution_clock::now();

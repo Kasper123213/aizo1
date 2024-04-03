@@ -12,23 +12,23 @@
 using namespace std;
 
 template<typename T>
-ManualTest<T>::ManualTest(){
+ManualTest<T>::ManualTest() {
     int choice = 0;
     string path;
-    do{
+    do {
 
-        cout<<"Wybierz co chcesz zrobić:"<<endl
-            <<"\t1. Wczytaj z pliku tablicę do posortowanie"<<endl
-            <<"\t2. Wygeneruj losową tablicę do posortowanie"<<endl
-            <<"\t3. Pokaż tablicę nieposortowaną (ostatnia wczytana lub wygenerowana)"<<endl
-            <<"\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo"<<endl
-            <<"\t5. Uruchom algorytm sortujący"<<endl
-            <<"\t6. Pokaż tablicę po posortowaniu"<<endl
-            <<"\t7. Zapisz tablicę po posortowaniu do pliku txt"<<endl
-            <<"\t0. Wyjdź z menu"<<endl
-            <<">>";
+        cout << "Wybierz co chcesz zrobić:" << endl
+             << "\t1. Wczytaj z pliku tablicę do posortowanie" << endl
+             << "\t2. Wygeneruj losową tablicę do posortowanie" << endl
+             << "\t3. Pokaż tablicę nieposortowaną (ostatnia wczytana lub wygenerowana)" << endl
+             << "\t4. Sprawdź czy tablica po posortowaniu jest posortowana prawidłowo" << endl
+             << "\t5. Uruchom algorytm sortujący" << endl
+             << "\t6. Pokaż tablicę po posortowaniu" << endl
+             << "\t7. Zapisz tablicę po posortowaniu do pliku txt" << endl
+             << "\t0. Wyjdź z menu" << endl
+             << ">>";
 
-        cin>>choice;
+        cin >> choice;
 
         switch (choice) {
             case 1: {
@@ -94,7 +94,7 @@ ManualTest<T>::ManualTest(){
             }
         }
 
-    }while(choice != 0);
+    } while (choice != 0);
 }
 
 template<typename T>
@@ -105,7 +105,7 @@ ManualTest<T>::~ManualTest() {
 
 
 template<typename T>
-bool ManualTest<T>::readFromFile(string path){
+bool ManualTest<T>::readFromFile(string path) {
     table->clear();
     sortedTable->clear();
 
@@ -164,38 +164,38 @@ void ManualTest<T>::generateTable(int size, int generatingType) {
 
 template<typename T>
 void ManualTest<T>::sort(int sortingType) {
-    Time* time = new Time();
+    Time *time = new Time();
     //  sortowanie przez wstawianie zwykłe i binarne, przez kopcowanie (heap sort) i szybkie
     switch (sortingType) {
-        case 1:{
-            InsertionSort<T>* insertionSort = new InsertionSort(table);
+        case 1: {
+            InsertionSort<T> *insertionSort = new InsertionSort(table);
 
             time->start();
             sortedTable = insertionSort->sort();
             long exTime = time->getTime();
-            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+            cout << "Czas wykonania algorytmu: " << exTime << "ms" << endl;
 
             delete insertionSort;
             break;
         }
-        case 2:{
-            BinaryInsertionSort<T>* binaryInsertionSort = new BinaryInsertionSort(table);
+        case 2: {
+            BinaryInsertionSort<T> *binaryInsertionSort = new BinaryInsertionSort(table);
 
             time->start();
             sortedTable = binaryInsertionSort->sort();
             long exTime = time->getTime();
-            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+            cout << "Czas wykonania algorytmu: " << exTime << "ms" << endl;
 
             delete binaryInsertionSort;
             break;
         }
-        case 3:{
-            HeapSort<T>* heapSort = new HeapSort(table);
+        case 3: {
+            HeapSort<T> *heapSort = new HeapSort(table);
 
             time->start();
             sortedTable = heapSort->sort();
             long exTime = time->getTime();
-            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+            cout << "Czas wykonania algorytmu: " << exTime << "ms" << endl;
 
             delete heapSort;
             break;
@@ -206,7 +206,7 @@ void ManualTest<T>::sort(int sortingType) {
             time->start();
             sortedTable = quickSort->sort();
             long exTime = time->getTime();
-            cout<< "Czas wykonania algorytmu: "<<exTime<<"ms"<<endl;
+            cout << "Czas wykonania algorytmu: " << exTime << "ms" << endl;
 
             delete quickSort;
             break;
@@ -216,17 +216,16 @@ void ManualTest<T>::sort(int sortingType) {
 }
 
 
-
 //zapisanie rozwiązania do pliku
 template<typename T>
-void ManualTest<T>::saveSolution(){
+void ManualTest<T>::saveSolution() {
     int index = 1;
-    string name ;
-    while(true){
+    string name;
+    while (true) {
         name = "sortedList" + to_string(index) + ".txt";
         ifstream file(name);
         break; //todo usunąć to
-        if(not file.good()) break;
+        if (not file.good()) break;
         index++;
     }
 
@@ -240,9 +239,9 @@ void ManualTest<T>::saveSolution(){
     // Sprawdzenie, czy plik został otwarty poprawnie
     if (file1.is_open()) {
 
-        for(int i=0; i< table->getSize(); i++){
+        for (int i = 0; i < table->getSize(); i++) {
 //            file << sortedTable->get(i) <<endl;
-            file1 << table->get(i) <<endl;
+            file1 << table->get(i) << endl;
         }
 
         // Zamknięcie pliku
@@ -257,5 +256,8 @@ void ManualTest<T>::saveSolution(){
 
 
 // Deklaracja szablonów klasowych
-template class ManualTest<int>;
-template class ManualTest<float>;
+template
+class ManualTest<int>;
+
+template
+class ManualTest<float>;

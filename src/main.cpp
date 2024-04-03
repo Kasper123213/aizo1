@@ -11,31 +11,31 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);    //ustawianie polskich znaków
 
 
-    srand(time(NULL));
+    srand(time(NULL)); //inicjacja generatora liczb pseudolosowych
 
 
-    cout << "Autor: Kasper Radom 264023" <<endl<< endl;
+    cout << "Autor: Kasper Radom 264023" << endl << endl;
 
     int choice = 0;
 
-    do{
-        cout<<"Jaki rodzaj testów wybierasz?"<<endl
-            <<"\t1. Testy manualne"<<endl
-            <<"\t2. Testy automatyczne"<<endl
-            <<"\t0. Zakończenie działania programu"<<endl
-            <<">>";
+    do {
+        cout << "Jaki rodzaj testów wybierasz?" << endl
+             << "\t1. Testy manualne" << endl
+             << "\t2. Testy automatyczne" << endl
+             << "\t0. Zakończenie działania programu" << endl
+             << ">>";
 
-        cin>>choice;
+        cin >> choice;
 
-        if(choice == 1){
+        if (choice == 1) {
             int dataType = 1;
 
-            cout<<"Na jakim typie danych chcesz operować?"<<endl
-            <<"\t1. int"<<endl
-            <<"\t2. float"<<endl
-            <<">>";
+            cout << "Na jakim typie danych chcesz operować?" << endl
+                 << "\t1. int" << endl
+                 << "\t2. float" << endl
+                 << ">>";
 
-            cin>>dataType;
+            cin >> dataType;
             //inicjowanie pamięci na włączenie testów
             switch (dataType) {
                 case 1: {
@@ -51,19 +51,13 @@ int main() {
             }
 
 
-        }else if(choice == 2){
+        } else if (choice == 2) {
             //inicjowanie pamięci na włączenie testów
-            AutoTest *test = new AutoTest; //todo dodać testy automatyczne
+            AutoTest *test = new AutoTest;
 
             delete test;
         }
-    }while(choice != 0);
-
-
-
-
-    //zwolnienie pamięci po objekcie test i wywołanie jego destruktora
-//    delete test;
+    } while (choice != 0);
 
     return 0;
 }

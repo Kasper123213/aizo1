@@ -6,16 +6,18 @@
 #include "../structures/Heap.h"
 
 template<typename T>
-class HeapSort{
+class HeapSort {
 private:
-    Table<T>* table;
+    Table<T> *table;
 
 public:
-    HeapSort(Table<T>* table);
+    HeapSort(Table<T> *table);
+
     ~HeapSort();
 
-    void setNewTable(Table<T>* table);
-    Table<T>* sort();
+    void setNewTable(Table<T> *table);
+
+    Table<T> *sort();
 };
 
 

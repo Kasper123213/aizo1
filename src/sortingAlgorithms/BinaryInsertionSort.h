@@ -6,16 +6,18 @@
 
 
 template<typename T>
-class BinaryInsertionSort{
+class BinaryInsertionSort {
 private:
-    Table<T>* table;
+    Table<T> *table;
 
 public:
-    BinaryInsertionSort(Table<T>* table);
+    BinaryInsertionSort(Table<T> *table);
+
     ~BinaryInsertionSort();
 
-    void setNewTable(Table<T>* table);
-    Table<T>* sort();
+    void setNewTable(Table<T> *table);
+
+    Table<T> *sort();
 };
 
 

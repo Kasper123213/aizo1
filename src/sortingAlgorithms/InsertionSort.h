@@ -5,16 +5,18 @@
 #include "../structures/Table.h"
 
 template<typename T>
-class InsertionSort{
+class InsertionSort {
 private:
-    Table<T>* table;
+    Table<T> *table;
 
 public:
-    InsertionSort(Table<T>* table);
+    InsertionSort(Table<T> *table);
+
     ~InsertionSort();
 
-    void setNewTable(Table<T>* table);
-    Table<T>* sort();
+    void setNewTable(Table<T> *table);
+
+    Table<T> *sort();
 };
 
 

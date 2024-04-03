@@ -24,42 +24,27 @@ template<typename T>
 void Heap<T>::set(int index, T value) {
     table[index] = value;
 }
+
 template<typename T>
 void Heap<T>::sortAfterSetting() {
-    for(int i = 2; i<=size;i++){
+    for (int i = 2; i <= size; i++) {
         int j = i;
-        int k = j/2;
-        T x = table[i-1];
+        int k = j / 2;
+        T x = table[i - 1];
 
-        while(k>0 and table[k-1]<x){
-            table[j-1] = table[k-1];
-            j=k;
-            k=j/2;
+        while (k > 0 and table[k - 1] < x) {
+            table[j - 1] = table[k - 1];
+            j = k;
+            k = j / 2;
         }
-        table[j-1] = x;
+        table[j - 1] = x;
     }
 }
+
 template<typename T>
 void Heap<T>::setSize(int size) {
     this->size = size;
     this->table = new T[size];
-}
-
-
-template<typename T>
-void Heap<T>::sortAfterAdding() {
-    int index = size;     //tworzymy robocze zmienne
-    T value;
-    while (index > 1) {
-        //jesli rodzic jest mniejszy od potomka to zamieniamy ich miejscami
-        if (table[index - 1] > table[int(index / 2) - 1]) {
-            value = table[index - 1];
-            table[index - 1] = table[int(index / 2) - 1];
-            table[int(index / 2) - 1] = value;
-        }
-        //potem przechodzimy na rodzicaa i powtarzamy algorytm az dojdziemy do korzenia
-        index = int(index / 2);
-    }
 }
 
 
@@ -103,27 +88,13 @@ void Heap<T>::sortAfterRemoving(int index) {
 
 }
 
-
-template<typename T>
-bool Heap<T>::doesExist(T value) {
-    for (int i = 0; i < size; i++) { //sprawdzamy czy w kopcu istnieje podana wartosc
-        if (table[i] == value)return true; //jesli istnieje zwracamy true
-    }
-    return false;
-}
-
-
-template<typename T>
-void Heap<T>::print() {   //metoda drukujaca kopiec jako tablice
-    for (int i = 0; i < size; i++) {
-        cout << "[" << i << "] " << table[i] << endl;
-    }
-}
-
 template<typename T>
 int Heap<T>::getSize() { return size; }  //metoda zwracajaca ilosc wezlow w kopcu
 
 
 // Deklaracja szablonów klasowych
-template class Heap<int>;
-template class Heap<float>;
+template
+class Heap<int>;
+
+template
+class Heap<float>;

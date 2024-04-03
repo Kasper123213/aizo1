@@ -12,8 +12,6 @@ public:
 
     ~Heap();
 
-    void add(T value);
-
     void set(int index, T value);
 
     void sortAfterSetting();
@@ -22,19 +20,12 @@ public:
 
     T getRoot();
 
-    bool doesExist(T value);
-
-    void print();
-
 
     int getSize();
 
 private:
     T *table = nullptr;
     int size = 0;
-
-
-    void sortAfterAdding();
 
     void sortAfterRemoving(int index = 1);
 };

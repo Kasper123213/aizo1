@@ -6,17 +6,20 @@
 #include "../structures/Table.h"
 
 template<typename T>
-class QuickSort{
+class QuickSort {
 private:
-    Table<T>* table;
+    Table<T> *table;
+
     void sortQuick(int left, int right);
 
 public:
-    QuickSort(Table<T>* table);
+    QuickSort(Table<T> *table);
+
     ~QuickSort();
 
-    void setNewTable(Table<T>* table);
-    Table<T>* sort();
+    void setNewTable(Table<T> *table);
+
+    Table<T> *sort();
 };
 
 
